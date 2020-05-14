@@ -19,13 +19,31 @@
             font-size: 1.5rem;
             padding: 1rem;
         }
-        .signup-input-username{
+        .signup-input-username-container{
+            width: 100%;
             background: #262626;
-            border: none;
-            font-size: 1.2rem;
-            padding: 1rem;
-            color: white;
-            outline: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            min-width: 632px;
+            .signup-input-username{
+                background: #262626;
+                border: none;
+                font-size: 1.2rem;
+                padding: 1rem;
+                color: white;
+                outline: none;
+                width: 75%;
+            }
+            .signup-username-duplicate-container{
+                width: 25%;
+                display: flex;
+                justify-content: flex-end;
+                .signup-username-duplicate{
+                    cursor: pointer;
+                    padding: 1rem;
+                }
+            }
         }
         .signup-input-password{
             background: #262626;
@@ -34,14 +52,34 @@
             padding: 1rem;
             color: white;
             outline: none;
+            width: calc(100% - 2rem);
+            min-width: 600px;
         }
-        .signup-input-checkpassword{
+        .signup-input-checkpassword-container{
+            width: 100%;
             background: #262626;
-            border: none;
-            font-size: 1.2rem;
-            padding: 1rem;
-            color: white;
-            outline: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            min-width: 632px;
+            .signup-input-checkpassword{
+                background: #262626;
+                border: none;
+                font-size: 1.2rem;
+                padding: 1rem;
+                color: white;
+                outline: none;
+                width: 75%;
+            }
+            .signup-checkpassword-btn-container{
+                width: 25%;
+                display: flex;
+                justify-content: flex-end;
+                .signup-checkpassword-btn{
+                    cursor: pointer;
+                    padding: 1rem;
+                }
+            }
         }
         .signup-input-name{
             background: #262626;
@@ -50,6 +88,8 @@
             padding: 1rem;
             color: white;
             outline: none;
+            width: calc(100% - 2rem);
+            min-width: 600px;
         }
         .signup-input-phone{
             background: #262626;
@@ -58,6 +98,8 @@
             padding: 1rem;
             color: white;
             outline: none;
+            width: calc(100% - 2rem);
+            min-width: 600px;
         }
         .signup-input-email{
             background: #262626;
@@ -66,6 +108,8 @@
             padding: 1rem;
             color: white;
             outline: none;
+            width: calc(100% - 2rem);
+            min-width: 600px;
         }
         .signup-terms{
             font-size: 1.5rem;
@@ -73,6 +117,8 @@
             padding-top: 2rem;
             color: white;
             padding-bottom: 0;
+            width: calc(100% - 2rem);
+            min-width: 600px;
         }
         .signup-terms-container{
             display: flex;
