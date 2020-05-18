@@ -1,14 +1,15 @@
-.test-container{
-    min-height: 100vh;
+.student-container{
     width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    .test-content-container{
+    align-items: center;
+    .student-content-container{
         width: 100%;
         min-height: calc(100% - 8rem);
         display: flex;
         flex-direction: column;
-        .test-content-header-container{
+        .student-content-header-container{
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -18,16 +19,50 @@
             height: 4rem;
             color: white;
             width: calc(100% - 24rem);
-            .test-content-header-left{
+            .student-content-header-left{
                 width: 70%;
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
-                .test-content-title{
+                .student-content-title{
                     font-size: 1.6rem;
-                    min-width: 120px;
                 }
-                .test-content-dropdown-third{
+                .student-content-dropdown-first{
+                    color: #a6a6a6;
+                    cursor: pointer;
+                    outline: none;
+                    font-size: 1rem;
+                    border: 1px solid #a6a6a6;
+                    height: 2rem;
+                    min-width: 5rem;
+                    margin-left: 6rem;
+                    .react-select__control{
+                        background: black;
+                        outline: none;
+                        border: none;
+                        min-height: 1.5rem;
+                        box-shadow: none;
+                        .react-select__value-container{
+                            border: none;
+                            .react-select__single-value{
+                                font-size: 1rem;
+                                color: white;
+                            }
+                        }
+                        .react-select__indicators{
+                            border: none;
+                            padding: 0;
+                            .react-select__indicator-separator{
+                                display: none;
+                            }
+                            .react-select__indicator{
+                                padding-top: 0;
+                                padding-bottom: 0;
+                            }
+                        }
+                    }
+                }
+                .student-content-dropdown-second{
                     color: #a6a6a6;
                     cursor: pointer;
                     outline: none;
@@ -62,77 +97,7 @@
                         }
                     }
                 }
-                .test-content-dropdown-second{
-                    color: #a6a6a6;
-                    cursor: pointer;
-                    outline: none;
-                    font-size: 1rem;
-                    border: 1px solid #a6a6a6;
-                    height: 2rem;
-                    min-width: 8rem;
-                    margin-left: 0.5rem;
-                    .react-select__control{
-                        background: black;
-                        outline: none;
-                        border: none;
-                        min-height: 1.5rem;
-                        box-shadow: none;
-                        .react-select__value-container{
-                            border: none;
-                            .react-select__single-value{
-                                font-size: 1rem;
-                                color: white;
-                            }
-                        }
-                        .react-select__indicators{
-                            border: none;
-                            padding: 0;
-                            .react-select__indicator-separator{
-                                display: none;
-                            }
-                            .react-select__indicator{
-                                padding-top: 0;
-                                padding-bottom: 0;
-                            }
-                        }
-                    }
-                }
-                .test-content-dropdown-first{
-                    color: #a6a6a6;
-                    cursor: pointer;
-                    outline: none;
-                    font-size: 1rem;
-                    border: 1px solid #a6a6a6;
-                    height: 2rem;
-                    min-width: 5rem;
-                    margin-left: 2rem;
-                    .react-select__control{
-                        background: black;
-                        outline: none;
-                        border: none;
-                        min-height: 1.5rem;
-                        box-shadow: none;
-                        .react-select__value-container{
-                            border: none;
-                            .react-select__single-value{
-                                font-size: 1rem;
-                                color: white;
-                            }
-                        }
-                        .react-select__indicators{
-                            border: none;
-                            padding: 0;
-                            .react-select__indicator-separator{
-                                display: none;
-                            }
-                            .react-select__indicator{
-                                padding-top: 0;
-                                padding-bottom: 0;
-                            }
-                        }
-                    }
-                }
-                .test-content-search-btn{
+                .student-content-search-btn{
                     background: #404040;
                     color: #a8a8a8;
                     display: flex;
@@ -145,11 +110,11 @@
                     min-width: 40px;
                 }
             }
-            .test-content-header-right{
+            .student-content-header-right{
                 width: 30%;
                 display: flex;
                 justify-content: flex-end;
-                .test-register{
+                .student-register{
                     border: 1px solid #a6a6a6;
                     border-radius: 20px;
                     color: white;
@@ -160,12 +125,12 @@
                 }
             }
         }
-        .test-content-body-container{
+        .student-content-body-container{
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            .test-content-body-header{
+            .student-content-body-header{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
@@ -173,29 +138,23 @@
                 background: #262626;
                 width: 100%;
                 height: 3rem;
-                .test-content-body-header-text{
+                .student-content-body-header-text{
                     color: #a6a6a6;
                     font-size: 1.2rem;
                     display: flex;
                     justify-content: center;
                     &:nth-child(1){
-                        width: 28vw;
+                        width: 16vw;
+                        margin-left: 8vw;
                     }
                     &:nth-child(2){
-                        width: 9vw;
+                        width: 16vw;
                     }
                     &:nth-child(3){
-                        width: 9vw;
-                    }
-                    &:nth-child(4){
-                        width: 9vw;
-                    }
-                    &:nth-child(5){
-                        width: 20vw;
+                        width: 16vw;
                     }
                 }
             }
         }
     }
 }
-
