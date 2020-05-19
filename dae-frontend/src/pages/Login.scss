@@ -21,7 +21,7 @@
         flex-direction: row;
         align-items: center;
         .selecter{
-            width: 100px;
+            min-width: 100px;
             font-size: 1.5rem;
             font-weight: 400;
             border-right: 1px solid #606060;
@@ -67,6 +67,7 @@
             padding-left: 0.5rem;
             color: #595959;
             font-weight: 600;
+            cursor: pointer;
         }
     }
     .login-btn{

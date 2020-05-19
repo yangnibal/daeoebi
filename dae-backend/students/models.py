@@ -1,21 +1,24 @@
 from django.db import models
 from groups.models import Group
+from account.models import User
 
 class Student(models.Model):
     GRADE_CHOICES = (
-        ("E1", "E1"),
-        ("E2", "E2"),
-        ("E3", "E3"),
-        ("E4", "E4"),
-        ("E5", "E5"),
-        ("E6", "E6"),
-        ("M1", "M1"),
-        ("M2", "M2"),
-        ("M3", "M3"),
-        ("H1", "H1"),
-        ("H2", "H2"),
-        ("H3", "H3")
+        ("초1", "초1"),
+        ("초2", "초2"),
+        ("초3", "초3"),
+        ("초4", "초4"),
+        ("초5", "초5"),
+        ("초6", "초6"),
+        ("중1", "중1"),
+        ("중2", "중2"),
+        ("중3", "중3"),
+        ("고1", "고1"),
+        ("고2", "고2"),
+        ("고3", "고3")
     )
     name = models.CharField(max_length=5)
     grade = models.CharField(max_length=2, choices=GRADE_CHOICES)
     group = models.ManyToManyField(Group, default=None)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    id = models.AutoField(primary_key=True)

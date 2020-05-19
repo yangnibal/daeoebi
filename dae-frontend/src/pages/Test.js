@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import DropDown from '../components/DropDown'
 import { observable, action } from 'mobx'
+import axios from 'axios'
+import TestContent from '../components/TestContent'
 
 @inject('store')
 @observer
@@ -15,6 +17,7 @@ class Test extends React.Component{
     @observable schoolyear = ""
     @observable semester = ""
     @observable subject = ""
+    @observable tests = [] 
 
     @action schoolyearValueChange = (e) => {
         this.schoolyear = e.value
@@ -25,9 +28,78 @@ class Test extends React.Component{
     @action subjectChange = (e) => {
         this.subject = e.value
     }
+    @action testModify = (schoolyear, test_type, subject, additional_info, average, std_dev, cand_num, id) => {
+        const { store } = this.props;
+        store.testinfo = {schoolyear: schoolyear, test_type: test_type, subject: subject, additional_info: additional_info, average: average, std_dev: std_dev, cand_num: cand_num, id: id }
+        this.props.history.push(`/academy/test/${id}/update`) 
+    }
+    @action testRemove = (id) => {
+        const ltoken = localStorage.getItem('token')
+        const stoken = sessionStorage.getItem('token')
+        var token = ""
+        if(stoken===null){
+            token = ltoken
+        } else {
+            token = stoken
+        }
+        axios.delete("http://localhost:8000/tests/" + id + "/", {
+            headers: {
+                Authorization: "Token " + token
+            }
+        })
+        .then(res => {
+            console.log(res)
+            window.location.reload()
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+    @action addTestStudent = (id) => {
+        
+    }
     
+    componentDidMount(){
+        const ltoken = localStorage.getItem('token')
+        const stoken = sessionStorage.getItem('token')
+        var token = ""
+        if(stoken===null){
+            token = ltoken
+        } else {
+            token = stoken
+        }
+        axios.get("http://localhost:8000/tests/", {
+            headers: {
+                Authorization: "Token "+token
+            }
+        })
+        .then(res => {
+            this.tests = res.data['results']
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     render(){
         const { store } = this.props
+        const testlist = this.tests.map(test => (
+            <TestContent
+                grade={test.grade}
+                test_type={test.test_type}
+                subject={test.subject}
+                additional_info={test.additional_info}
+                average={test.average}
+                std_dev={test.std_dev}
+                cand_num={test.cand_num}
+                student={test.student.length}
+                key={test.id}
+                id={test.id}
+                testModify={() => this.testModify(test.grade, test.test_type, test.subject, test.additional_info, test.average, test.std_dev, test.cand_num, test.id)}
+                testRemove={() => this.testRemove(test.id)}
+                addTestStudent={() => this.addTestStudent(test.id)}
+            />
+        ))
         return(
             <div className="test-container">
                 <Header/>
@@ -48,9 +120,12 @@ class Test extends React.Component{
                         <div className="test-content-body-header">
                             <div className="test-content-body-header-text">TEST 구분</div>
                             <div className="test-content-body-header-text">평균</div>
-                            <div className="test-content-body-header-text">표준 편차</div>
+                            <div className="test-content-body-header-text">표준 편차</div>
                             <div className="test-content-body-header-text">응시자 수</div>
                             <div className="test-content-body-header-text">성적 등록 학생수</div>
+                        </div>
+                        <div className="test-content-body">
+                            {testlist}
                         </div>
                     </div>
                 </div>
