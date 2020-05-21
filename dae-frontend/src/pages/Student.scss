@@ -185,9 +185,6 @@
                     align-items: center;
                     font-size: 1.1rem;
                     .studentcontent-checkbox{
-                        display: none;
-                    }
-                    input[id="check"] + label{
                         width: 20px;
                         height: 20px;
                         border: 1px solid #a6a6a6;
@@ -195,7 +192,7 @@
                         margin-left: 16vw;
                         cursor: pointer;
                     }
-                    input[id="check"]:checked + label{
+                    .checked{
                         background: #404040;
                     }
                     .studentcontent-name{

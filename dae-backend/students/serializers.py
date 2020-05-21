@@ -1,4 +1,4 @@
-from .models import Student
+from .models import Student, CheckedStudent
 from rest_framework import serializers
 
 class StudentSerializer(serializers.ModelSerializer):
@@ -7,3 +7,8 @@ class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
         fields = ['name', 'grade', 'group', 'owner', 'id']
+
+class CheckedStudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CheckedStudent
+        fields = ['name', 'grade', 'group']

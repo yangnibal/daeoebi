@@ -27,3 +27,7 @@ class TestViewSet(viewsets.ModelViewSet):
     @action(detail=False, list=True, methods=['POST'])
     def addstd(self, request):
         test = Test.objects.get(id=request.data['id'])
+
+    @action(detail=False, list=True, methods=['GET'])
+    def getstd(self, request):
+        test = Test.objects.get(id=request.data['id'])

@@ -1,11 +1,10 @@
 import React from 'react'
 
-const StudentContent = ({name, grade, group, id, studentModify, studentRemove, checked, onChange}) => {
+const StudentContent = ({name, grade, group, id, studentModify, studentRemove, checked, onChange, testChange}) => {
     return (
         <div className="studentcontent-container">
-            <input checked={checked} onChange={onChange} name="isChecked" type="checkbox" className="studentcontent-checkbox" id="check"/>
-            <label htmlFor="check"/>
-            <div className="studentcontent-name">{name}</div>
+            <div className={checked===false ? "studentcontent-checkbox" : "studentcontent-checkbox checked"} onClick={onChange} name={name} id={id}/>
+            <div className="studentcontent-name" onClick={testChange}>{name}</div>
             <div className="studentcontent-grade">{grade}</div>
             <div className="studentcontent-group">{group}</div>
             <div className="studentcontent-modify-remove">

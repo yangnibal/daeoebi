@@ -18,13 +18,14 @@ from django.urls import path, include
 from rest_framework import routers
 from account.views import UserViewSet
 from tests.views import TestViewSet
-from students.views import StudentViewSet
+from students.views import StudentViewSet, CheckedStudentViewSet
 from groups.views import GroupViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'tests', TestViewSet)
 router.register(r'students', StudentViewSet)
+router.register(r'checkedstudents', CheckedStudentViewSet)
 router.register(r'groups', GroupViewSet)
 
 urlpatterns = [

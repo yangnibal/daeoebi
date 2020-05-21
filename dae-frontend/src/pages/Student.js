@@ -24,13 +24,17 @@ class Student extends React.Component{
     @action groupChange = (e) => {
         this.group = e.value
     }
-    @action handleCheckboxChange = (e) => {
-        const { name, checked } = e.target
-        this[name] = checked
+    @action handleToggle = (e) => {
         var students = this.students
         students.forEach(student => {
-            if(student.id === e.target.id){
-                student.isChecked = e.target.checked
+            if(student.id===e.target.id){
+                /*if(student.isChecked===false){
+                    e.target.className="studentcontent-checkbox checked"
+                } else {
+                    e.target.className="studentcontent-checkbox"
+                }*/
+                student.isChecked = !student.isChecked
+                console.log(student.isChecked)
             }
         })
         this.students = students
@@ -41,6 +45,7 @@ class Student extends React.Component{
         var students = this.students
         students.forEach(student => student.isChecked = e.target.checked)
         this.students = students
+        console.log(this.students)
     }
     @action studentModify = (name, grade, group, id) => {
         const { store } = this.props
@@ -69,11 +74,52 @@ class Student extends React.Component{
         })
     }
     @action gradeRegister = () => {
-        const { store } = this.props
+        const ltoken = localStorage.getItem('token')
+        const stoken = sessionStorage.getItem('token')
+        var token = ""
+        if(stoken===null){
+            token = ltoken
+        } else {
+            token = stoken
+        }
         var students = this.students
         const checkedStudents = students.filter(student => student.isChecked===true)
-        store.checkedStudents = checkedStudents
-        this.props.history.push("/academy/student/inputscore")
+        axios.post("http://localhost:8000/checkedstudents/postdatalist/", ({
+            data: checkedStudents
+        }), {
+            headers: {
+                Authorization: "Token" + token
+            }
+        })
+        .then(res => {
+            console.log(res)
+            this.props.history.push("/academy/student/inputscore")
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        /*checkedStudents.forEach(student => {
+            axios.post("http://localhost:8000/checkedstudents/", ({
+                name: student.name,
+                grade: student.grade,
+                group: student.group
+            }), {
+                headers: {
+                    Authorization: "Token" + token
+                }
+            })
+            .then(res => {})
+            .catch(err => {})
+        })
+        .then(res => {
+            this.props.history.push("/academy/student/inputscore")
+        })
+        setTimeout(() => {
+            this.props.history.push("/academy/student/inputscore")
+        }, 1000)*/
+    }
+    @action testChange = (e) => {
+        console.log(e.target)
     }
 
     componentDidMount(){
@@ -85,16 +131,17 @@ class Student extends React.Component{
         } else {
             token = stoken
         }
-        axios.get("http://localhost:8000/students/", {
+        axios.get("http://localhost:8000/students/getmystd/", {
             headers: {
                 Authorization: "Token " + token
             }
         })
         .then(res => {
-            this.students = res.data['results']
+            this.students = res.data
             var students = this.students
             students.map(student => student.isChecked=false)
             this.students = students
+            console.log(this.students)
         })
         .catch(err => {
             console.log(err)
@@ -113,7 +160,8 @@ class Student extends React.Component{
                 studentModify={() => this.studentModify(student.name, student.grade, student.group, student.id)}
                 studentRemove={() => this.studentRemove(student.id)}
                 checked={student.isChecked}
-                onChange={this.handleCheckboxChange}
+                onChange={this.handleToggle}
+                testChange={this.testChange}
             />
         ))
         return(
