@@ -56,7 +56,8 @@ class Test extends React.Component{
         })
     }
     @action addTestStudent = (id) => {
-        
+        localStorage.setItem("testId", id)
+        this.props.history.push("/academy/student")
     }
     
     componentDidMount(){

@@ -200,11 +200,14 @@
                 min-height: calc(100vh - 18rem);
                 .testcontent-container{
                     width: 100%;
-                    height: 3rem;
+                    height: 4rem;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
                     font-size: 1.1rem;
+                    &:nth-child(1){
+                        padding-top: 1rem;
+                    }
                     .testcontent-test-sort{
                         width: 28vw;
                         display: flex;
@@ -230,6 +233,9 @@
                         display: flex;
                         justify-content: center;
                         cursor: pointer;
+                        color: #f6c243;
+                        font-weight: 600;
+                        font-size: 1.2rem;
                     }
                     .testcontent-modify-remove{
                         display: flex;

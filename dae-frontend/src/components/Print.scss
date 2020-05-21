@@ -1,0 +1,145 @@
+.container{
+    width: 100vw;
+    height: 141.4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    .sticky-container{
+        margin: 8vw 9vw;
+        width: calc(100% - 18vw);
+        height: calc(100% - 16vw);
+        .top-content{
+            width: 100%;
+            height: 50%;
+            .top-content-header{
+                width: 100%;
+                background: rgb(176, 35, 24);
+                height: 33%;
+                display: flex;
+                flex-direction: column;
+                .top-content-header-top{
+                    width: 100%;
+                    height: 50%;
+                    display: flex;
+                    align-items: flex-end;
+                    .top-content-header-top-title{
+                        margin-bottom: 2vw;
+                        margin-left: 5vw;
+                        word-spacing: 0.5vw;
+                        color: white;
+                        font-size: 2.2vw;
+                        font-weight: lighter;
+                        span{
+                            font-weight: normal;
+                        }
+                    }
+                }
+                .top-content-header-bottom{
+                    width: 100%;
+                    height: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    flex-direction: row;
+                    .top-content-header-bottom-test-type{
+                        font-size: 4vw;
+                        color: white;
+                        font-weight: bold;
+                        word-spacing: 0.5vw;
+                        margin-left: 5vw;
+                        margin-bottom: 3vw;
+                        width: 50%;
+                    }
+                    .top-content-header-bottom-name-grade-group{
+                        width: 50%;
+                        color: white;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: flex-end;
+                        .ngg{
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            margin-right: 5vw;
+                            margin-bottom: 2vw;
+                            .name{
+                                font-size: 3vw;
+                                font-weight: bold;
+                                margin-bottom: 1vw;
+                            }
+                            .grade{
+                                font-size: 1.3vw;
+                            }
+                            .group{
+                                font-size: 1.3vw;
+                            }
+                        }
+                        
+                    }
+                }
+            }
+            .top-content-body{
+                height: 50%;
+                width: 100%;
+                .top-content-body-first{
+                    margin-top: 2vw;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    height: 20%;
+                    .top-content-body-title{
+                        color: black;
+                        font-size: 1.7vw;
+                        font-weight: bold;
+                        width: 18%;
+                        border: none;
+                        padding: 1vw 0;
+                        border-right: 2px solid #d6c6b5;
+                    }
+                    .top-content-body-text{
+                        color: #969690;
+                        width: calc(82% - 2vw);
+                        margin-left: 2vw;
+                        font-size: 1.2vw;
+                    }
+                }
+                .top-content-body-second{
+                    margin-top: 1vw;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    height: 20%;
+                    .top-content-body-title{
+                        color: black;
+                        font-size: 1.7vw;
+                        font-weight: bold;
+                        width: 18%;
+                        border: none;
+                        padding: 1vw 0;
+                        border-right: 2px solid #d6c6b5;
+                    }
+                    .top-content-body-text{
+                        color: #969690;
+                        width: calc(82% - 2vw);
+                        margin-left: 2vw;
+                        font-size: 1.2vw;
+                    }
+                }
+            }
+        }
+        .bottom-content{
+            height: 50%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            .bottom-content-header{
+                width: 100%;
+                height: 22%;
+                background: rgb(176, 35, 24);
+                display: flex;
+                flex-direction: row;
+            }
+        }
+    }
+}

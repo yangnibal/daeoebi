@@ -15,6 +15,7 @@ import NewGroup from './pages/NewGroup'
 import TestModify from './pages/TestModify'
 import StudentModify from './pages/StudentModify'
 import InputScore from './pages/InputScore'
+import Print from './components/Print'
 
 class App extends React.Component{
 	render(){
@@ -36,6 +37,7 @@ class App extends React.Component{
 					<Route exact path="/academy/grade" component={Grade}/>
 					<Route exact path="/academy/grade/new" component={NewGrade}/>
 					<Route exact path="/academy/group/new" component={NewGroup}/>
+					<Route exact path="/print" component={Print}/>
 				</Switch>
 			</BrowserRouter>
 		)
