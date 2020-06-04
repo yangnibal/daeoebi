@@ -2,17 +2,11 @@ from .models import Test
 from rest_framework import serializers
 
 class TestSerializer(serializers.ModelSerializer):
-    owner = serializers.CharField(source='owner.username', read_only=True)
-    id = serializers.CharField(read_only=True)
+    owner = serializers.CharField(source="owner.username", required=False)
     class Meta:
         model = Test
         fields = ['owner', 'grade', 'test_type', 'subject', 'average', 'std_dev', 'cand_num', 'additional_info', 'student', 'id']
-
-class TestUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Test
-        fields = ['grade', 'test_type', 'subject', 'average', 'std_dev', 'cand_num', 'additional_info', 'id']
-
+    
     def update(self, instance, validate_data):
         instance.grade = validate_data.get("grade", instance.grade)
         instance.test_type = validate_data.get("test_type", instance.test_type)

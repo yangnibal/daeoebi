@@ -22,6 +22,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     name = models.CharField(max_length=5)
     phone_number = models.CharField(max_length=11)
+    id = models.AutoField(primary_key=True)
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email', 'password', 'is_staff', 'name', 'phone_number']
 

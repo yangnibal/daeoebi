@@ -9,8 +9,8 @@ class Grademanage extends React.Component{
             <div className="grademanage-container">
                 <Header/>
                 <div className="grademanage-content-container">
-                    <Link className="grademanage-content-academy" to="/academy">학원 회원</Link>
-                    <Link className="grademanage-content-individual" to="/individual">개인 회원</Link>
+                    <Link className="grademanage-content-academy" to="/ac">학원 회원</Link>
+                    <Link className="grademanage-content-individual" to="/ac">개인 회원</Link>
                 </div>
             </div>
         )

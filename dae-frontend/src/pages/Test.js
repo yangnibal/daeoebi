@@ -31,7 +31,7 @@ class Test extends React.Component{
     @action testModify = (schoolyear, test_type, subject, additional_info, average, std_dev, cand_num, id) => {
         const { store } = this.props;
         store.testinfo = {schoolyear: schoolyear, test_type: test_type, subject: subject, additional_info: additional_info, average: average, std_dev: std_dev, cand_num: cand_num, id: id }
-        this.props.history.push(`/academy/test/${id}/update`) 
+        this.props.history.push(`/ac/test/${id}/update`) 
     }
     @action testRemove = (id) => {
         const ltoken = localStorage.getItem('token')
@@ -48,16 +48,40 @@ class Test extends React.Component{
             }
         })
         .then(res => {
-            console.log(res)
             window.location.reload()
         })
         .catch(err => {
             console.log(err)
         })
     }
-    @action addTestStudent = (id) => {
-        localStorage.setItem("testId", id)
-        this.props.history.push("/academy/student")
+    @action addTestStudent = (id, test_type) => {
+        localStorage.setItem("test_id", id)
+        this.props.history.push("/ac/student")
+    }
+    @action findTest = (grade, semester, subject) => {
+        const ltoken = localStorage.getItem('token')
+        const stoken = sessionStorage.getItem('token')
+        var token = ""
+        if(stoken===null){
+            token = ltoken
+        } else {
+            token = stoken
+        }
+        axios.post("http://localhost:8000/tests/findtest/", ({
+            grade: grade,
+            test_type: semester,
+            subject: subject
+        }), {
+            headers: {
+                Authorization: "Token " + token
+            }
+        })
+        .then(res => {
+            this.tests = res.data
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
     
     componentDidMount(){
@@ -69,13 +93,13 @@ class Test extends React.Component{
         } else {
             token = stoken
         }
-        axios.get("http://localhost:8000/tests/", {
+        axios.get("http://localhost:8000/tests/getmytest/", {
             headers: {
                 Authorization: "Token "+token
             }
         })
         .then(res => {
-            this.tests = res.data['results']
+            this.tests = res.data
         })
         .catch(err => {
             console.log(err)
@@ -98,7 +122,7 @@ class Test extends React.Component{
                 id={test.id}
                 testModify={() => this.testModify(test.grade, test.test_type, test.subject, test.additional_info, test.average, test.std_dev, test.cand_num, test.id)}
                 testRemove={() => this.testRemove(test.id)}
-                addTestStudent={() => this.addTestStudent(test.id)}
+                addTestStudent={() => this.addTestStudent(test.id, test.test_type)}
             />
         ))
         return(
@@ -108,13 +132,13 @@ class Test extends React.Component{
                     <div className="test-content-header-container">
                         <div className="test-content-header-left">
                             <div className="test-content-title">TEST 목록</div>
-                            <DropDown placeholder="학년" option={store.schoolyear} className="test-content-dropdown-first" classNamePrefix="react-select" onChange={this.schoolyearChange} isClearable={this.isClearable} isSearchable={this.isSearchable}/>
+                            <DropDown placeholder="학년" option={store.schoolyear} className="test-content-dropdown-first" classNamePrefix="react-select" onChange={this.schoolyearValueChange} isClearable={this.isClearable} isSearchable={this.isSearchable}/>
                             <DropDown placeholder="학기" option={store.semester} className="test-content-dropdown-second" classNamePrefix="react-select" onChange={this.semesterChange} isClearable={this.isClearable} isSearchable={this.isSearchable}/>
                             <DropDown placeholder="과목" option={store.subject} className="test-content-dropdown-third" classNamePrefix="react-select" onChange={this.subjectChange} isClearable={this.isClearable} isSearchable={this.isSearchable}/>
-                            <div className="test-content-search-btn">검색</div>
+                            <div className="test-content-search-btn" onClick={() => this.findTest(this.schoolyear, this.semester, this.subject)}>검색</div>
                         </div>
                         <div className="test-content-header-right">
-                            <Link to="/academy/test/new" className="test-register">TEST 등록</Link>
+                            <Link to="/ac/test/new" className="test-register">TEST 등록</Link>
                         </div>
                     </div>
                     <div className="test-content-body-container">

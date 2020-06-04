@@ -14,7 +14,7 @@ class NewGrade extends React.Component{
                     <input className="newgrade-content-input" placeholder="학년 선택"/>
                     <input className="newgrade-content-input" placeholder="그룹 선택"/>
                     <div className="newgrade-content-group-add-container">
-                        <Link to="/academy/group/new" className="newgrade-content-group-add">그룹 추가</Link>
+                        <Link to="/ac/group/new" className="newgrade-content-group-add">그룹 추가</Link>
                     </div>
                     <div className="newgrade-content-btn-container">
                         <div className="newgrade-content-btn">등록</div>

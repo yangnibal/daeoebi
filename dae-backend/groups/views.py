@@ -8,3 +8,16 @@ from rest_framework.response import Response
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+    def create(self, request):
+        serializer = GroupSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(owner=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @action(detail=False, list=True, methods=['GET'])
+    def getmygroup(self, request):
+        group = Group.objects.filter(owner=request.user)
+        serializer = GroupSerializer(group, many=True)
+        return Response(serializer.data)

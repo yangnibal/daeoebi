@@ -33,12 +33,13 @@ class Login extends React.Component{
                     password: this.password
                 }))
                 .then(res => {
-                    this.props.history.push("/")
                     if(this.saveId===true){
                         localStorage.setItem("token", res.data['token'])
                     } else {
                         sessionStorage.setItem("token", res.data['token'])
                     }
+                    this.props.history.push("/")
+                    window.location.reload()
                 })
                 .catch(err => {
                     alert("비밀번호나 아이디가 일치하지 않습니다.")
@@ -70,8 +71,8 @@ class Login extends React.Component{
                 </div>
                 <div className="login-btn" onClick={() => this.handleLogin()}>로그인</div>
                 <div className="login-others-container">
-                    <Link className="login-find-username">아이디 찾기</Link>
-                    <Link className="login-find-password">비밀번호 찾기</Link>
+                    <Link to="/account/findid" className="login-find-username">아이디 찾기</Link>
+                    <Link to="/account/findpw" className="login-find-password">비밀번호 찾기</Link>
                     <Link className="login-signup-link" to="/account/signup">회원 가입</Link>
                 </div>
             </div>

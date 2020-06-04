@@ -19,6 +19,7 @@ class StudentModify extends React.Component{
         this.name = ""
         this.grade = ""
         this.group = ""
+        localStorage.removeItem("std_id")
         store.studentinfo = {}
     }
     @action handleChange = (e) => {
@@ -27,7 +28,7 @@ class StudentModify extends React.Component{
     }
     @action cancleModify = () => {
         this.init_data()
-        this.props.history.push("/academy/student")
+        this.props.history.push("/ac/student")
     }
     @action addStudent = (name, grade, group) => {
         const ltoken = localStorage.getItem('token')
@@ -38,9 +39,10 @@ class StudentModify extends React.Component{
         } else {
             token = stoken
         }
+        const id = localStorage.getItem("std_id")
         if(name!=="" && grade!==""){
             if(group===""){
-                axios.post("http://localhost:8000/students/", ({
+                axios.patch("http://localhost:8000/students/" + id + "/", ({
                     name: name,
                     grade: grade
                 }), {
@@ -50,13 +52,13 @@ class StudentModify extends React.Component{
                 })
                 .then(res => {
                     this.init_data()
-                    this.props.history.push("/academy/student")
+                    this.props.history.push("/ac/student")
                 })
                 .catch(err => {
                     console.log(err)
                 })
             } else {
-                axios.post("http://localhost:8000/students/", ({
+                axios.patch("http://localhost:8000/students/" + id + "/", ({
                     name: name,
                     grade: grade,
                     group: group
@@ -67,7 +69,7 @@ class StudentModify extends React.Component{
                 })
                 .then(res => {
                     this.init_data()
-                    this.props.history.push("/academy/student")
+                    this.props.history.push("/ac/student")
                 })
                 .catch(err => {
                     console.log(err)
@@ -84,6 +86,7 @@ class StudentModify extends React.Component{
         this.name = studentinfo.name
         this.grade = studentinfo.grade
         this.group = studentinfo.group
+        localStorage.setItem("std_id", studentinfo.id)
     }
 
     render(){
@@ -96,7 +99,7 @@ class StudentModify extends React.Component{
                     <input name="grade" value={this.grade} onChange={this.handleChange} className="newstudent-content-input" placeholder="학년 선택"/>
                     <input name="group" value={this.group} onChange={this.handleChange} className="newstudent-content-input" placeholder="그룹 선택"/>
                     <div className="newstudent-content-group-add-container">
-                        <Link to="/academy/group/new" className="newstudent-content-group-add">그룹 추가</Link>
+                        <Link to="/ac/group/new" className="newstudent-content-group-add">그룹 추가</Link>
                     </div>
                     <div className="newstudent-content-btn-container">
                         <div className="newstudent-content-btn" onClick={() => this.addStudent(this.name, this.grade, this.group)}>수정</div>

@@ -21,9 +21,13 @@ class Test(models.Model):
         ("1학기 중간", "1학기 중간"),
         ("1학기 기말", "1학기 기말"),
         ("2학기 중간", "2학기 중간"),
-        ("2학기 기말", "2학기 기말")
+        ("2학기 기말", "2학기 기말"),
+        ("3월 모의고사", "3월 모의고사"),
+        ("6월 모의고사", "6월 모의고사"),
+        ("9월 모의고사", "9월 모의고사"),
+        ("11월 모의고사", "11월 모의고사"),
     )
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     grade = models.CharField(max_length=2, choices=GRADE_CHOICES)
     test_type = models.CharField(max_length=10, choices=TESTTYPE_CHOICES)
     subject = models.CharField(max_length=10)

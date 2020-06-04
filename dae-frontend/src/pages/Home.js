@@ -6,12 +6,15 @@ import { Link } from 'react-router-dom'
 import './Home.scss'
 
 class Home extends React.Component{
+    componentDidMount(){
+        localStorage.setItem("checkedstudent", "")
+    }
     render(){
         return(
             <Layout>
                 <Header/>
                 <div className="home-content-container">
-                    <Link to="/grade_management" className="home-content">[대외비 성적 등급 관리] 프로그램</Link>
+                    <Link to="/gm" className="home-content">[대외비 성적 등급 관리] 프로그램</Link>
                     <Link to="" className="home-content">[대외비 교재 출력 관리] 프로그램</Link>
                 </div>
                 <div className="background-container">

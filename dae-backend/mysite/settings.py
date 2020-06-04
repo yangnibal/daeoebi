@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'account',
     'tests',
     'students',
-    'groups'
+    'groups',
+    'score'
 ]
 
 MIDDLEWARE = [

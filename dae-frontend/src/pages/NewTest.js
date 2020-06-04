@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import { observer, inject } from 'mobx-react'
 import { observable, action } from 'mobx'
 import axios from 'axios'
+import DropDown from '../components/DropDown'
 
 @inject('store')
 @observer
@@ -15,15 +16,27 @@ class NewTest extends React.Component{
     @observable std_dev = ""
     @observable cand_num = ""
     @observable additional_info = ""
+    @observable isClearable = false
+    @observable isSearchable = true
 
-    @action init_data = () => {
-        this.schoolyear = ""
-        this.test_type = ""
-        this.subject = ""
+    @action schoolyearChange = (e) => {
+        this.schoolyear = e.value
+    }
+
+    @action testTypeChange = (e) => {
+        this.test_type = e.value
+    }
+
+    @action init_data = (flag) => {
+        if(flag){
+            this.schoolyear = ""
+            this.test_type = ""
+        }
         this.average = ""
         this.std_dev = ""
         this.cand_num = ""
         this.additional_info = ""
+        this.subject = ""
     }
     @action handleChange = (e) => {
         const { name, value } = e.target
@@ -54,10 +67,10 @@ class NewTest extends React.Component{
             })
             .then(res => {
                 if(add_new===true){
-                    this.init_data()
+                    this.init_data(false)
                 } else {
-                    this.init_data()
-                    this.props.history.push("/academy/test/")
+                    this.init_data(true)
+                    this.props.history.push("/ac/test/")
                 }
             })
             .catch(err => {
@@ -69,14 +82,15 @@ class NewTest extends React.Component{
     }
 
     render(){
+        const { store } = this.props
         return(
             <div className="newtest-container">
                 <Header/>
                 <div className="newtest-content-container">
                     <div className="newtest-content-title">TEST 기본 정보 입력</div>
-                    <input name="schoolyear" value={this.schoolyear} onChange={this.handleChange} className="newtest-content-input" placeholder="학년 선택 (ex: 중1)"/>
-                    <input name="test_type" value={this.test_type} onChange={this.handleChange} className="newtest-content-input" placeholder="TEST 종류 선택 (ex: 1학기 중간)"/>
-                    <input name="subject" value={this.subject} onChange={this.handleChange} className="newtest-content-input" placeholder="과목 선택"/>
+                    <DropDown placeholder="학년 선택" option={store.schoolyear} className="newtest-content-dropdown" classNamePrefix="react-select" onChange={this.schoolyearChange} isClearable={this.isClearable} isSearchable={this.isSearchable}/>
+                    <DropDown placeholder="TEST 종류 선택" option={store.semester} className="newtest-content-dropdown" classNamePrefix="react-select" onChange={this.testTypeChange} isClearable={this.isClearable} isSearchable={this.isSearchable}/>
+                    <input name="subject" value={this.subject} onChange={this.handleChange} className="newtest-content-input" placeholder="과목 입력"/>
                     <input name="additional_info" value={this.additional_info} onChange={this.handleChange} className="newtest-content-input" placeholder="TEST 추가 정보 입력(학교 등)"/>
                     <input name="average" value={this.average} onChange={this.handleChange} className="newtest-content-input" placeholder="평균 입력"/>
                     <input name="std_dev" value={this.std_dev} onChange={this.handleChange} className="newtest-content-input" placeholder="표준편차 입력"/>

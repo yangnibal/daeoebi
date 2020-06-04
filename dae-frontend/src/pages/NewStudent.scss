@@ -1,3 +1,38 @@
+.grade-content-dropdown-first{
+    color: #a6a6a6;
+    cursor: pointer;
+    outline: none;
+    font-size: 1rem;
+    border: 1px solid #a6a6a6;
+    height: 2rem;
+    min-width: 5rem;
+    margin-left: 3rem!important;
+    .react-select__control{
+        background: black;
+        outline: none;
+        border: none;
+        min-height: 1.5rem;
+        box-shadow: none;
+        .react-select__value-container{
+            border: none;
+            .react-select__single-value{
+                font-size: 1rem;
+                color: white;
+            }
+        }
+        .react-select__indicators{
+            border: none;
+            padding: 0;
+            .react-select__indicator-separator{
+                display: none;
+            }
+            .react-select__indicator{
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+}
 .newstudent-container{
     width: 100vw;
     height: 100vh;
@@ -11,6 +46,40 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        .newstudent-content-dropdown{
+            color: white;
+            border: none;
+            width: 100%;
+            min-width: calc(600px + 2rem);
+            
+            outline: none;
+            .react-select__control{
+                background: #262626;
+                border: none;
+                border-radius: 0;
+                outline: none;
+                box-shadow: none;
+                padding: 0.7rem 0;
+                .react-select__value-container{
+                    border: none;
+                    .react-select__placeholder{
+                        font-size: 1rem;
+                        color: #807f80;
+                        font-size: 1.4rem;
+                        margin-left: 0.5rem;
+                    }
+                    .react-select__single-value{
+                        font-size: 1rem;
+                        color: white;
+                        font-size: 1.4rem;
+                        margin-left: 0.5rem;
+                    }
+                }
+            }
+            .react-select__menu{
+                background: #262626;
+            }
+        }
         .newstudent-content-title{
             width: 100%;
             display: flex;
@@ -76,4 +145,8 @@
             }
         }
     }
+}
+
+.react-select__option--is-focused{
+    background: #4185f7!important;
 }

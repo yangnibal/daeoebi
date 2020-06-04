@@ -4,20 +4,16 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import authenticate
 
 class UserSerializer(serializers.ModelSerializer):
+    id = serializers.CharField(read_only=True)
     class Meta:
         model = User
-        fields = ['username', 'name', 'is_staff', 'password', 'phone_number', 'email']
+        fields = ['username', 'name', 'is_staff', 'password', 'phone_number', 'email', 'id']
 
     def create(self, validated_data):
         user = User.objects.create(**validated_data)
         user.set_password(user.password)
         user.save()
         return user
-
-class UserUpdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['username', 'name', 'email', 'password', 'phone_number']
 
     def update(self, instance, validated_data):
         instance.username = validated_data.get("username", instance.username)
@@ -27,7 +23,6 @@ class UserUpdateSerializer(serializers.ModelSerializer):
         instance.set_password(validated_data.get('password', instance.password))
         instance.save()
         return instance
-
 
 class AuthTokenSerializer(serializers.Serializer):
     username = serializers.CharField(label=_("Username"))

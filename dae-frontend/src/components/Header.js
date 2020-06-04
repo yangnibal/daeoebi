@@ -15,12 +15,12 @@ const Header = () => {
     return (
         <div className="header-container">
             <Link to="/">
-                <img src={Logo} alt={Logo} width="190px" height="35px" className="header-logo"/>
+                <img src={Logo} alt={Logo} width="190px" height="40px" className="header-logo"/>
             </Link>
             <div className="link-dae-home">대외비 홈페이지 바로가기</div>
             <a href="http://dreamrun.itforone.co.kr/bbs/login.php" className="link-dae-app">[대외비 APP 학습 관리] 프로그램 바로가기</a>
             {token===null? <Link className="link-login" to="/account/login">로그인</Link> :
-            <Link className="link-login" to="/account/login">로그아웃</Link> }
+            <span className="span"><Link className="link-login" to="/account/login">로그아웃</Link>&nbsp;/&nbsp;<Link className="link-login" to="/account/edit">내정보 수정</Link></span> }
         </div>
     )
 }

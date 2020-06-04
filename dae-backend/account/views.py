@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import User
 from rest_framework import viewsets
-from .serializers import UserSerializer, AuthTokenSerializer, UserUpdateSerializer
+from .serializers import UserSerializer, AuthTokenSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,6 +10,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import (action, api_view)
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import IsAuthenticated
+from .sendemail import send_id, init_pw
+import random
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -29,8 +31,9 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, pk=None):
-        serializer = UserUpdateSerializer(self.request.user,data=request.data)
+    def update(self, request, pk, partial=True):
+        instance = self.get_object()
+        serializer = UserSerializer(instance ,data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -74,5 +77,28 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = UserUpdateSerializer(user)
 
     @action(detail=False, list=True, methods=['POST'])
-    def find_username(self, request):
-        pass
+    def findid(self, request):
+        try:
+            user = User.objects.get(name=request.data['name'], phone_number=request.data['phone_number'], email=request.data['email'])
+            send_id(user.email, user.username, user.name)
+            return Response("email sended")
+        except User.DoesNotExist:
+            return Response("incorrect info")
+
+    @action(detail=False, list=True, methods=['POST'])
+    def findpw(self, request):
+        try:
+            user = User.objects.get(username=request.data['username'], name=request.data['name'], phone_number=request.data['phone_number'], email=request.data['email'])
+            possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+            new_pw = ""
+            for i in range(10):
+                new_pw += random.choice(possible)
+            
+            init_pw(user.email, user.username, user.name, new_pw)
+            request.data['password'] = new_pw
+            serializer = UserUpdateSerializer(self.request.user, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+            return Response("email sended")
+        except User.DoesNotExist:
+            return Response("incorrect info")

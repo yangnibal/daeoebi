@@ -20,6 +20,40 @@
             font-size: 1.5rem;
             padding-bottom: 2rem;
         }
+        .newtest-content-dropdown{
+            color: white;
+            border: none;
+            width: 100%;
+            min-width: calc(600px + 2rem);
+            
+            outline: none;
+            .react-select__control{
+                background: #262626;
+                border: none;
+                border-radius: 0;
+                outline: none;
+                box-shadow: none;
+                padding: 0.7rem 0;
+                .react-select__value-container{
+                    border: none;
+                    .react-select__placeholder{
+                        font-size: 1rem;
+                        color: #807f80;
+                        font-size: 1.4rem;
+                        margin-left: 0.5rem;
+                    }
+                    .react-select__single-value{
+                        font-size: 1rem;
+                        color: white;
+                        font-size: 1.4rem;
+                        margin-left: 0.5rem;
+                    }
+                }
+            }
+            .react-select__menu{
+                background: #262626;
+            }
+        }
         .newtest-content-input{
             background: #262626;
             border: none;
@@ -61,4 +95,8 @@
             }
         }
     }
+}
+
+.react-select__option--is-focused{
+    background: #4185f7!important;
 }

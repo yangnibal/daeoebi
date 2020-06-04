@@ -3,6 +3,7 @@ import { observable } from 'mobx'
 export default class Store{
     @observable testinfo = {}
     @observable studentinfo = {}
+    @observable gradeinfo = {}
     @observable checkedStudents = []
     @observable schoolyear = [
         { value: "초1", label: "초1" },
@@ -23,11 +24,31 @@ export default class Store{
         { value: "1학기 기말", label: "1학기 기말" },
         { value: "2학기 중간", label: "2학기 중간" },
         { value: "2학기 기말", label: "2학기 기말" },
+        { value: "3월 모의고사", label: "3월 모의고사" },
+        { value: "6월 모의고사", label: "6월 모의고사" },
+        { value: "9월 모의고사", label: "9월 모의고사" },
+        { value: "11월 모의고사", label: "11월 모의고사" },
     ]
     @observable subject = [
-        { value: "math", label: "수학" },
-        { value: "english", label: "영어" },
-        { value: "korean", label: "국어" },
-        { value: "science", label: "과학" },
+        { value: "수학", label: "수학" },
+        { value: "영어", label: "영어" },
+        { value: "국어", label: "국어" },
+        { value: "과학", label: "과학" },
     ]
+    @observable group = []
+    @observable data = [
+        {
+            "점수 비교": "평균",
+            "average": 72.6,
+            "averageColor": "hsl(215,54%,73%)",
+            "myscore": 0
+        },
+        {
+            "점수 비교": "내점수",
+            "average": 0,
+            "myscore": 98,
+            "myscoreColor": "hsl(263,22%,56%)"
+        }
+    ]
+    @observable printProps = {}
 }

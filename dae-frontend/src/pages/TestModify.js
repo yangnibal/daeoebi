@@ -33,7 +33,7 @@ class NewTest extends React.Component{
     }
     @action cancleModify = () => {
         this.init_data()
-        this.props.history.push("/academy/test")
+        this.props.history.push("/ac/test")
     }
     @action addTest = (schoolyear, test_type, subject, average, std_dev, cand_num, additional_info) => {
         const { store } = this.props
@@ -62,7 +62,7 @@ class NewTest extends React.Component{
             })
             .then(res => {
                 this.init_data()
-                this.props.history.push("/academy/test/")
+                this.props.history.push("/ac/test/")
             })
             .catch(err => {
                 console.log(err)
