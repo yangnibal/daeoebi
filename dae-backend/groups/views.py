@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Group
+from students.models import Student
 from .serializers import GroupSerializer
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
@@ -20,4 +21,11 @@ class GroupViewSet(viewsets.ModelViewSet):
     def getmygroup(self, request):
         group = Group.objects.filter(owner=request.user)
         serializer = GroupSerializer(group, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, list=True, methods=['POST'])
+    def getstdgroup(self, request):
+        student = Student.objects.get(owner=request.user, name=request.data['name'])
+        group = Group.objects.get(owner=request.user, student=student)
+        serializer = GroupSerializer(group)
         return Response(serializer.data)

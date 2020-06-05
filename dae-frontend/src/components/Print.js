@@ -1,12 +1,21 @@
 import React from 'react'
 import { Print } from 'react-easy-print'
 import { observer, inject } from 'mobx-react'
+import { action } from 'mobx' 
 import { Chart } from 'react-google-charts'
+import html2canvas from 'html2canvas'
 import './Print.scss'
 
 @inject('store')
 @observer
 class PrintContent extends React.Component{
+
+    @action html2canvas = () => {
+        html2canvas(document.querySelector("#print")).then(canvas => {
+            return <Print>html</Print>
+        })
+    }
+
     render(){
         const { store } = this.props
         const chartOption1 = {
@@ -24,7 +33,7 @@ class PrintContent extends React.Component{
         const props = store.printProps
         return(
             <Print>
-            <div className="container">
+            <div className="container" id="print" onClick={() => this.html2canvas()}>
                 <div className="sticky-container">
                     <div className="top-content">
                         <div className="top-content-header">
@@ -150,19 +159,6 @@ class PrintContent extends React.Component{
                                 <Chart
                                     width={"100%"}
                                     height={"100%"}
-                                    chartType="Bar"
-                                    data={[
-                                        ["점수 비교", ""],
-                                        ['평균', props.average],
-                                        ['내 점수', props.score]
-                                    ]}
-                                    options={chartOption1}
-                                />
-                            </div>
-                            <div className="chart-2">
-                                <Chart
-                                    width={"100%"}
-                                    height={"100%"}
                                     chartType="BarChart"
                                     data={[
                                         ["등수 비교", "등수"],
@@ -171,6 +167,9 @@ class PrintContent extends React.Component{
                                     ]}
                                     options={chartOption2}
                                 />
+                            </div>
+                            <div className="chart-2">
+                                
                             </div>
                         </div>
                     </div>

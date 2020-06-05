@@ -17,6 +17,7 @@ class StudentTest extends React.Component{
     @observable semester = ""
     @observable subject = ""
     @observable schoolyear = ""
+    @observable group = ""
 
     @action schoolyearValueChange = (e) => {
         this.schoolyear = e.value
@@ -73,6 +74,28 @@ class StudentTest extends React.Component{
             console.log(err)
         })
     }
+    @action movePrintPage = (name, grade, group, score, percent, rank, rating, school, schoolyear, test_type, cand_num, average, std_dev, subject, z, prob_dens, id) => {
+        const { store } = this.props
+        store.printProps = { 
+            name: name, 
+            grade: grade, 
+            group: group, 
+            test_type: test_type, 
+            score: score, 
+            rank: rank, 
+            percent: percent, 
+            rating: rating, 
+            school: school, 
+            subject: subject, 
+            cand_num: cand_num, 
+            average: average, 
+            std_dev: std_dev, 
+            schoolyear: schoolyear,
+            z: z,
+            prob_dens: prob_dens
+        }
+        this.props.history.push("/printpage")
+    }
 
     componentDidMount(){
         this.name = localStorage.getItem("std_name")
@@ -85,6 +108,19 @@ class StudentTest extends React.Component{
         } else {
             token = stoken
         }
+        axios.post("http://localhost:8000/groups/getstdgroup/", ({
+            name: this.name
+        }), {
+            headers: {
+                Authorization: "Token " + token
+            }
+        })
+        .then(res => {
+            this.group = res.data['name']
+        })
+        .catch(err => {
+            console.log(err)
+        })
         axios.post("http://localhost:8000/scores/getstdscore/", ({
             id: id
         }), {
@@ -102,6 +138,10 @@ class StudentTest extends React.Component{
                         score[i].test_type = test[j]['test_type']
                         score[i].subject = test[j]['subject']
                         score[i].additional_info = test[j]['additional_info']
+                        score[i].grade = test[j]['grade']
+                        score[i].cand_num = test[j]['cand_num']
+                        score[i].average = test[j]['average']
+                        score[i].std_dev = test[j]['std_dev']
                     }
                 }
             }
@@ -113,6 +153,7 @@ class StudentTest extends React.Component{
     }
 
     render(){
+        console.log(this.scores)
         const { store } = this.props
         const scorelist = this.scores.map(score => (
             <StudentTestContent
@@ -127,6 +168,7 @@ class StudentTest extends React.Component{
                 gradeModify={this.Modify}
                 gradeRemove={this.Remove}
                 key={score.id}
+                movePrintPage={() => this.movePrintPage(this.name, score.grade, this.group, score.score, score.percent, score.rank, score.rating, score.additional_info, score.grade, score.test_type, score.cand_num, score.average, score.std_dev, score.subject, score.z, score.prob_dens, score.id)}
             />
         ))
         return(
