@@ -5,14 +5,19 @@ import { action } from 'mobx'
 import { Chart } from 'react-google-charts'
 import html2canvas from 'html2canvas'
 import './Print.scss'
+import printJS from 'print-js'
 
 @inject('store')
 @observer
 class PrintContent extends React.Component{
 
-    @action html2canvas = () => {
+    @action Print = () => {
+        console.log("print")
         html2canvas(document.querySelector("#print")).then(canvas => {
-            return <Print>html</Print>
+            printJS({
+                printable: canvas.toDataURL("images/data"),
+                type: "image"
+            })
         })
     }
 
@@ -33,7 +38,7 @@ class PrintContent extends React.Component{
         const props = store.printProps
         return(
             <Print>
-            <div className="container" id="print" onClick={() => this.html2canvas()}>
+            <div className="container" id="print" onClick={() => this.Print()}>
                 <div className="sticky-container">
                     <div className="top-content">
                         <div className="top-content-header">

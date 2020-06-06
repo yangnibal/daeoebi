@@ -5,11 +5,10 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Grademanage from './pages/Grademanage'
 import Academy from './pages/Academy';
-import Test from './pages/Test'
 import NewTest from './pages/NewTest'
-import Student from './pages/Student'
+import StudentList from './pages/StudentList'
 import NewStudent from './pages/NewStudent'
-import Grade from './pages/Grade'
+import GradeList from './pages/GradeList'
 import NewGrade from './pages/NewGrade'
 import NewGroup from './pages/NewGroup'
 import TestModify from './pages/TestModify'
@@ -22,6 +21,12 @@ import PrintProvider from 'react-easy-print'
 import PrintPage from './pages/PrintPage'
 import PrintContent from './components/Print';
 import EditUserInfo from './pages/EditUserInfo'
+import Inf from './pages/Inf'
+import TestList from './pages/TestList';
+import VidList from './pages/VidList'
+import NewVid from './pages/NewVid'
+import NewMat from './pages/NewMat'
+import MatList from './pages/MatList'
 
 class App extends React.Component{
 	render(){
@@ -37,19 +42,24 @@ class App extends React.Component{
 						<Route exact path="/account/edit" component={EditUserInfo}/>
 						<Route exact path="/gm" component={Grademanage}/>
 						<Route exact path="/ac" component={Academy}/>
-						<Route exact path="/ac/test" component={Test}/>
+						<Route exact path="/ac/test" component={TestList}/>
 						<Route exact path="/ac/test/new" component={NewTest}/>
 						<Route exact path="/ac/test/:testid/update" component={TestModify}/>
-						<Route exact path="/ac/student" component={Student}/>
+						<Route exact path="/ac/student" component={StudentList}/>
 						<Route exact path="/ac/student/inputscore" component={InputScore}/>
 						<Route exact path="/ac/student/new" component={NewStudent}/>
 						<Route exact path="/ac/student/:studentid/update" component={StudentModify}/>
 						<Route exact path="/ac/student/:studentid" component={StudentTest}/>
-						<Route exact path="/ac/grade/:testid" component={Grade}/>
+						<Route exact path="/ac/grade/:testid" component={GradeList}/>
 						<Route exact path="/ac/grade/new" component={NewGrade}/>
 						<Route exact path="/ac/group/new" component={NewGroup}/>
 						<Route exact path="/printpage" component={PrintPage}/>
 						<Route exact path="/printpage/print" component={PrintContent}/>
+						<Route exact path="/inf" component={Inf}/>
+						<Route exact path="/inf/vid" component={VidList}/>
+						<Route exact path="/inf/vid/new" component={NewVid}/>
+						<Route exact path="/inf/mat" component={MatList}/>
+						<Route exact path="/inf/mat/new" component={NewMat}/>
 					</Switch>
 				</BrowserRouter>
 			</PrintProvider>
