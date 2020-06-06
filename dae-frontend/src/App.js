@@ -27,6 +27,8 @@ import VidList from './pages/VidList'
 import NewVid from './pages/NewVid'
 import NewMat from './pages/NewMat'
 import MatList from './pages/MatList'
+import NewInfGroup from './pages/NewInfGroup'
+import VidDetail from './pages/VidDetail'
 
 class App extends React.Component{
 	render(){
@@ -60,6 +62,8 @@ class App extends React.Component{
 						<Route exact path="/inf/vid/new" component={NewVid}/>
 						<Route exact path="/inf/mat" component={MatList}/>
 						<Route exact path="/inf/mat/new" component={NewMat}/>
+						<Route exact path="/inf/group/new" component={NewInfGroup}/>
+						<Route exact path="/inf/vid/:vidid" component={VidDetail}/>
 					</Switch>
 				</BrowserRouter>
 			</PrintProvider>

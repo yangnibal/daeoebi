@@ -514,17 +514,36 @@
                 align-items: center;
                 justify-content: center;
                 .chart-1{
-                    width: 45%;
+                    width: 47%;
                     height: 100%;
-                    margin-top: 1vw;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
                 .chart-2{
-                    width: 45%;
-                    margin-top: 2vw;
+                    width: 47%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
             .logo-container{
                 height: 7.5%;
+            }
+            .print-logo-container{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .logo-sticky-container{
+                    width: 20vw;
+                    height: 4.5vw;
+                    .logo-img-print{
+                        height: 100%;
+                        width: auto;
+                    }
+                }
             }
         }
     }
@@ -539,9 +558,72 @@ path{
     }
 }
 
-rect{
-    &:nth-child(2){
+div > div:nth-child(1) > div > svg > g:nth-child(4) > g:nth-child(2) > g:nth-child(2) > rect:nth-child(1){
+    fill: #95b4df;
+}
+div > div:nth-child(1) > div > svg > g:nth-child(4) > g:nth-child(2) > g:nth-child(2) > rect:nth-child(2){
+    fill: #8976a8;
+}
+
+div > div > svg > g:nth-child(2) > text{
+    display: none;
+}
+div > div > svg > g:nth-child(2) > rect:nth-child(2){
+    display: none;
+}
+#reactgooglegraph-4 > div > div:nth-child(1) > div > svg > g:nth-child(3){
+    display: none;
+}
+
+#reactgooglegraph-3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vw;
+}
+#reactgooglegraph-4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vw;
+}
+> div > div:nth-child(1) > div > svg > g:nth-child(3){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+> div > div:nth-child(1) > div > svg > g:nth-child(3) > text{
+    font-weight: normal;
+}
+div > div > svg > g:nth-child(6) > text{
+    font-size: 1.2vw!important;
+    font-weight: 500;
+    &:nth-child(3){
         display: none;
     }
 }
+div > div > svg > g:nth-child(6) > text:nth-child(3){
+    font-size: 1.5vw;
+}
 
+
+#reactgooglegraph-4 > div > div:nth-child(1) > div > svg > g:nth-child(4) > g:nth-child(4) > g:nth-child(5) > text{
+    font-size: 1.3vw!important;
+    font-weight: 500;
+}
+#reactgooglegraph-4 > div > div:nth-child(1) > div > svg > g:nth-child(4) > g:nth-child(4) > g:nth-child(6) > text{
+    font-size: 1.3vw!important;
+    font-weight: 500;
+}
+#reactgooglegraph-3 > div > div > svg > g:nth-child(6) > text:nth-child(1){
+    font-size: 1.5vw!important;
+    font-weight: 500;
+}
+#reactgooglegraph-3 > div > div > svg > g:nth-child(6) > text:nth-child(2){
+    font-size: 1.5vw!important;
+    font-weight: 500;
+}
+
+#reactgooglegraph-6 > div > div:nth-child(1) > div > svg > g:nth-child(3){
+    display: none;
+}

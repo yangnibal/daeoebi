@@ -1,11 +1,11 @@
 import React from 'react'
-import { Print } from 'react-easy-print'
 import { observer, inject } from 'mobx-react'
 import { action } from 'mobx' 
 import { Chart } from 'react-google-charts'
 import html2canvas from 'html2canvas'
 import './Print.scss'
 import printJS from 'print-js'
+import Logo from '../images/logo1.png'
 
 @inject('store')
 @observer
@@ -30,14 +30,12 @@ class PrintContent extends React.Component{
             }
         }
         const chartOption2 = {
-            title: "등수 비교",
             hAxis: {
                 minValue: 0
             }
         }
         const props = store.printProps
         return(
-            <Print>
             <div className="container" id="print" onClick={() => this.Print()}>
                 <div className="sticky-container">
                     <div className="top-content">
@@ -163,24 +161,38 @@ class PrintContent extends React.Component{
                             <div className="chart-1">
                                 <Chart
                                     width={"100%"}
-                                    height={"100%"}
+                                    height={"92%"}
+                                    chartType="Bar"
+                                    data={[
+                                        ["점수 비교", "점수"],
+                                        ['평균', Number(props.average)],
+                                        ['내점수', Number(props.score)]
+                                    ]}
+                                    options={chartOption1}
+                                />
+                            </div>
+                            <div className="chart-2">
+                                <Chart
+                                    width={"100%"}
+                                    height={"92%"}
                                     chartType="BarChart"
                                     data={[
                                         ["등수 비교", "등수"],
                                         ['응시자 인원', Number(props.cand_num)],
-                                        ['나의 예상 등수', Number(props.rank)]
+                                        ['예상 등수', Number(props.rank)]
                                     ]}
                                     options={chartOption2}
                                 />
                             </div>
-                            <div className="chart-2">
-                                
+                        </div>
+                        <div className="print-logo-container">
+                            <div className="logo-sticky-container">
+                                <img src={Logo} alt={Logo} className="logo-img-print"/>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </Print>
         )
     }
 }

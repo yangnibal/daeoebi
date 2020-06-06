@@ -180,6 +180,7 @@ class StudentList extends React.Component{
                 onNameClick={() => this.nameClick(student.id, student.name)}
             />
         )})
+        const test_id = localStorage.getItem("test_id")
         return(
             <div className="student-container">
                 <Header/>
@@ -208,7 +209,7 @@ class StudentList extends React.Component{
                             {studentlist}
                         </div>
                         <div  className="student-content-footer">
-                            <div className="student-content-body-footer" onClick={() => this.choiceTest()}>TEST 선택하기</div>
+                            {test_id===null ? <div className="student-content-body-footer" onClick={() => this.choiceTest()}>TEST 선택하기</div> : null}
                             <div className="student-content-body-footer" onClick={() => this.gradeRegister()}>선택 학생 성적 등록</div>
                         </div>
                     </div>

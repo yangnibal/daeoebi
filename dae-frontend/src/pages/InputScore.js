@@ -43,6 +43,7 @@ class InputScore extends React.Component{
         })
         .then(res => {
             this.props.history.push(`/ac/grade/${test_id}`)
+            localStorage.removeItem("test_id")
         })
         .catch(err => {
             console.log(err)

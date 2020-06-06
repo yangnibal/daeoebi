@@ -51,4 +51,5 @@ export default class Store{
         }
     ]
     @observable printProps = {}
+    @observable infgroup = []
 }

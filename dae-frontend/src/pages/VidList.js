@@ -4,13 +4,56 @@ import { observable, action } from 'mobx'
 import DropDown from '../components/DropDown'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
+import axios from 'axios'
 import './VidList.scss'
+import VidContent from '../components/VidContent';
 
 @inject('store')
 @observer
 class VidList extends React.Component{
+
+    @observable vids = []
+    
+    @action watchVid = (id, iframe) => {
+        this.props.history.push(`/inf/vid/${id}`)
+        localStorage.setItem("iframe", iframe)
+    }
+
+    componentDidMount(){
+        const ltoken = localStorage.getItem('token')
+        const stoken = sessionStorage.getItem('token')
+        var token = ""
+        if(stoken===null){
+            token = ltoken
+        } else {
+            token = stoken
+        }
+        axios.get("http://localhost:8000/videos", {
+            headers: {
+                Authorization: "Token " + token
+            }
+        })
+        .then(res => {
+            this.vids = res.data['results']
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+
     render(){
         const { store } = this.props
+        const vidlist = this.vids.map(vid => (
+            <VidContent
+                name={vid.name}
+                grade={vid.grade}
+                group={vid.group}
+                subject={vid.subject}
+                key={vid.id}
+                watchVid={() => {this.watchVid(vid.id, vid.iframe)}}
+            />
+        ))
         return(
             <div className="vid-container">
                 <Header/>
@@ -34,6 +77,9 @@ class VidList extends React.Component{
                             <div className="vid-body-header-text">추천 학년</div>
                             <div className="vid-body-header-text">그룹</div>
                             <div className="vid-body-header-text">동영상 재생 시간</div>
+                        </div>
+                        <div className="vid-content-body">
+                            {vidlist}
                         </div>
                     </div>
                 </div>
